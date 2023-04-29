@@ -27,22 +27,19 @@ class Client:
         self.balance -= amount
         print(f"Your balance decreased by {amount}")
         print(f"Total balance for {self.name} is {self.balance}")
-    
-    
-    
 
-	def send_money(self, receiver_account_number, amount):
-	        if self.balance < amount:
-	            return 'balance is not enough
-	        else:
-	            client_object = [obj for obj in globals().values() if isinstance(
-	                obj, Client) and obj.account_number == receiver_account_number]
-	            if len(client_object) == 0:
-	                print('client not found')
-	            else:
-	                reciever_object = client_object[0]
-	                reciever_object.balance += amount
-                self.balance -= amount
+    def send_money(self, receiver_account_number, amount):
+	if self.balance < amount:
+	    return 'balance is not enough
+	else:
+	    client_object = [obj for obj in globals().values() if isinstance(
+		obj, Client) and obj.account_number == receiver_account_number]
+	    if len(client_object) == 0:
+		print('client not found')
+	    else:
+		reciever_object = client_object[0]
+		reciever_object.balance += amount
+	self.balance -= amount
 
 ```
 

@@ -7,6 +7,7 @@ Odev:
 1- Banka olarak kayit olan musterilere cocuk basina 250 euro bonus verilme karari alindi.
 Buna gore 3 musteri(object) olusturup 2 sinin cocugu oldugunu dusunerek objeleri tanimlayin.
 
+```
 import random
 
 class Client:
@@ -43,7 +44,7 @@ class Client:
 	                reciever_object.balance += amount
                 self.balance -= amount
 
-
+```
 
 
 

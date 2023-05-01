@@ -36,11 +36,11 @@ class Client:
                 reciever_object.balance += amount
             self.balance -= amount
 
-    def childeren_money(self):
+    def children_money(self):
         if self.children > 0:
             amount = self.children * 250
-            print("Congratulations!\nYour bank gave a decision.\nEvery customer who has a child will take 250 euro per child.")
-            Client.add_deposit(self, amount)
+            print("Congratulations!\nYour bank has made a decision.\nEvery customer who has a child will receive 250 euro per child.")
+            self.add_deposit(amount)
 
 
 cl_1 = Client("Yavuz", "Gulderen", 2500, 0, "M")
@@ -52,4 +52,4 @@ print(cl_2.full_name)
 obje_list = [obj for obj in globals().values() if isinstance(obj, Client)]
 
 for Client in obje_list:
-    Client.childeren_money
+    Client.children_money()

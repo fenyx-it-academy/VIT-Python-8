@@ -12,17 +12,21 @@ class Account:
         print(
             f"Account Number: {self.account_number}, Owner Name: {self.owner_name}, Balance: €{self.balance}")
 
-    def withdraw_deposit(self, amount):
-        pass
+    def withdraw_money(self, amount):
+        self.balance -= amount
+        print(f"Process completed. New balance: €{self.balance}")
+        print(
+            f"Account Number: {self.account_number}, Owner Name: {self.owner_name}, Balance: €{self.balance}")
 
     def total_balance(self):
-        pass
+        print(
+            f"Account Number: {self.account_number}, Owner Name: {self.owner_name}, Balance: €{self.balance}")
 
 
 class Bank:
     BankName = "ING Bank"
     num_clients = 0
-    total_balance = 0
+    # total_balance = 0
 
     def __init__(self):
         self.accounts = {}
@@ -34,12 +38,14 @@ class Bank:
         # Bank.total_balance += self.balance
         Bank.num_clients += 1
         print(f"{Bank.num_clients}. musterimizsiniz.")
-        for acc_num, account in bank.accounts.items():
-            print(
-                f"Account Number: {acc_num}, Owner Name: {account.owner_name}, Balance: €{account.balance}")
 
-    def del_account(account_number):
-        pass
+        # for acc_num, account in bank.accounts.items():
+        #     print(
+        #         f"Account Number: {acc_num}, Owner Name: {account.owner_name}, Balance: €{account.balance}")
+
+    def del_account(self, account_number):
+        del self.accounts[account_number]
+        print("The account has been successfully removed.")
 
 
 bank = Bank()
@@ -59,13 +65,13 @@ print("""
 Bankacilik sistemine hoş geldiniz!""")
 
 while True:
-    choice = input("""  Ne yapmak istersiniz?
-    0️⃣   Cikis
-    1️⃣   Hesap Olustur
-    2️⃣   Para Yatirma
-    3️⃣   Para Cekme
-    4️⃣   Hesap Silme
-    5️⃣   Toplam Bakiye Sorgulama
+    choice = input("""  What would you like to do?
+    0️⃣   EXIT
+    1️⃣   Open an account
+    2️⃣   Deposit money
+    3️⃣   Withdraw money
+    4️⃣   Delete an account
+    5️⃣   Total Balance Inquiry
     SECIM: """)
 
     if choice == "0":
@@ -81,10 +87,17 @@ while True:
         amount = float(input("Please enter the amount.\n€"))
         bank.accounts[account_number].add_deposit(amount)
     elif choice == "3":
-        pass
+        account_number = input(
+            "Please enter account number which you want to withdraw money?\n")
+        amount = float(input("Please enter the amount.\n€"))
+        bank.accounts[account_number].withdraw_money(amount)
     elif choice == "4":
-        pass
+        account_number = input(
+            "Please enter account number which you want to remove completely?\n")
+        bank.del_account(account_number)
     elif choice == "5":
-        pass
+        account_number = input(
+            "Please enter account number which you want to see total balance inquiry?\n")
+        bank.accounts[account_number].total_balance()
     else:
         print("Gecersiz bir giris yaptiniz.\nLutfen tekrar deneyin!")

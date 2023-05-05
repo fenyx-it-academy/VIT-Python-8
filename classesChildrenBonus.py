@@ -1,0 +1,52 @@
+import random
+
+class Client:
+    def __init__(self, name,last_name,balance , children =0 ,gender='uncertain'):
+        self.name = name
+        self.last_name = last_name
+        self.email = f"{name.lower()}.{last_name}@company.com"
+        self.balance= balance
+        self.children = children
+        self.gender = gender
+        self.account_number = ('ABN' + f'{random.randint(1000000000,9999999999)}')
+        if self.children > 0:
+            #self.balance += children * 250      #her cocuk sayisi basina hesap açılırken otomatik olarak 250 euro  balance artirilir
+            self.Bonus()
+    def add_deposit(self, amount):
+        self.balance+= amount
+        print(f"Your balance increased by {amount}")
+        print(f"Total balance for {self.name} is {self.balance}")
+    def withdraw_money(self,amount):
+        self.balance -= amount
+        print(f"Your balance decreased by {amount}")
+        print(f"Total balance for {self.name} is {self.balance}")
+
+    def send_money(self, receiver_account_number, amount):
+        if self.balance < amount:
+            return 'balance is not enough'
+        else:
+            client_object = [obj for obj in globals().values() if isinstance(
+                obj, Client) and obj.account_number == receiver_account_number]
+            if len(client_object) == 0:
+                print('client not found')
+            else:
+                reciever_object = client_object[0]
+                reciever_object.balance += amount
+        self.balance -= amount
+    def check_balance(self, name):
+        print(self.balance)
+
+    def Bonus(self):
+        amount=self.children*250
+        self.balance+=amount
+        
+
+c1 = Client('gokmen','salbas', 500,2,'M' ) #Hesap açılırken çocuk bonusu hesaplanarak hesaba ilave ediliyor
+c2 = Client('mustafa','ak', 200,2,'M')
+c3 = Client("ayla","sari" , 4000,0, 'F')
+
+print(c2.account_number)
+print(c1.balance)
+print(c2.balance)
+print(c3.balance)
+c1.check_balance('gokmen')
